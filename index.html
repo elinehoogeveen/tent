@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Animated Textileforms — Video Index</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;1,400;1,500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #EDEAE2;
+    --paper: #F5F3ED;
+    --ink: #201F1D;
+    --ink-soft: #55524B;
+    --thread: #6B4226;
+    --accent: #3A5A55;
+    --line: #C9C2B4;
+    --line-soft: #DAD5C8;
+    --radius: 2px;
+    --max: 880px;
+  }
+
+  *{ box-sizing: border-box; }
+
+  html{ scroll-behavior: smooth; }
+
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a{ color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+  a:hover{ color: var(--thread); }
+  a:focus-visible, button:focus-visible{
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  h1, h2, h3{
+    font-family: 'Newsreader', serif;
+    font-weight: 500;
+    margin: 0;
+    color: var(--ink);
+  }
+
+  .wrap{
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 0 28px;
+    position: relative;
+  }
+
+  /* --- Warp threads: faint vertical grid running the height of the page --- */
+  .warp{
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+  .warp span{
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 1px;
+    background: var(--line-soft);
+  }
+  .warp span:nth-child(1){ left: 28px; }
+  .warp span:nth-child(2){ left: 50%; }
+  .warp span:nth-child(3){ right: 28px; }
+
+  main, header, footer{ position: relative; z-index: 1; }
+
+  /* --- Header / hero --- */
+  header{
+    padding: 72px 0 56px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .kicker{
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin: 0 0 18px;
+    letter-spacing: 0.01em;
+  }
+
+  header h1{
+    font-size: clamp(30px, 5vw, 44px);
+    line-height: 1.15;
+    max-width: 14ch;
+  }
+
+  header p.lede{
+    margin: 20px 0 0;
+    max-width: 52ch;
+    color: var(--ink-soft);
+    font-size: 16.5px;
+  }
+
+  /* subtle hero motif: a row of "slits" that ease open, once, on load */
+  .slits{
+    display: flex;
+    gap: 10px;
+    margin-top: 40px;
+  }
+  .slit{
+    width: 34px;
+    height: 46px;
+    border: 1px solid var(--ink);
+    border-radius: var(--radius);
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .slit::before{
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 8%;
+    width: 1px;
+    height: 84%;
+    background: var(--ink);
+    transform: translateX(-50%) scaleX(1);
+    transform-origin: center;
+    animation: openSlit 2.6s ease-in-out infinite alternate;
+  }
+  .slit:nth-child(2)::before{ animation-delay: .3s; }
+  .slit:nth-child(3)::before{ animation-delay: .6s; }
+  .slit:nth-child(4)::before{ animation-delay: .9s; }
+  .slit:nth-child(5)::before{ animation-delay: 1.2s; }
+
+  @keyframes openSlit{
+    from{ width: 1px; }
+    to{ width: 14px; background: transparent; border-left: 1px solid var(--ink); border-right: 1px solid var(--ink); }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .slit::before{ animation: none; width: 8px; background: transparent; border-left: 1px solid var(--ink); border-right: 1px solid var(--ink); }
+  }
+
+  /* --- Table of contents --- */
+  nav.toc{
+    padding: 28px 0;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 22px;
+  }
+  nav.toc a{
+    font-size: 14px;
+    color: var(--ink-soft);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  nav.toc a:hover{ color: var(--thread); }
+
+  /* --- Chapters --- */
+  .chapter{
+    padding: 64px 0;
+    border-bottom: 1px solid var(--line);
+    scroll-margin-top: 24px;
+  }
+  .chapter:last-of-type{ border-bottom: none; }
+
+  .chapter-head{
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 8px;
+  }
+  .chapter-num{
+    font-family: 'Newsreader', serif;
+    font-style: italic;
+    color: var(--thread);
+    font-size: 18px;
+    min-width: 28px;
+  }
+  .chapter h2{ font-size: 26px; }
+  .chapter-note{
+    color: var(--ink-soft);
+    max-width: 58ch;
+    margin: 14px 0 36px;
+    font-size: 15px;
+  }
+
+  .video-grid{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px 28px;
+  }
+  @media (max-width: 640px){
+    .video-grid{ grid-template-columns: 1fr; }
+  }
+
+  .video-card{ }
+
+  .video-frame{
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .video-frame iframe{
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+  /* placeholder look, remove once an iframe src is filled in */
+  .video-frame.is-empty{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ink-soft);
+    font-size: 13px;
+    text-align: center;
+    padding: 20px;
+  }
+
+  .video-title{
+    font-family: 'Newsreader', serif;
+    font-size: 18px;
+    margin: 16px 0 4px;
+  }
+  .video-caption{
+    font-size: 14px;
+    color: var(--ink-soft);
+    margin: 0;
+    max-width: 46ch;
+  }
+  .video-meta{
+    display: block;
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    margin-top: 8px;
+    font-family: 'IBM Plex Sans', sans-serif;
+  }
+  .video-meta a{ font-size: 12.5px; }
+
+  footer{
+    padding: 48px 0 72px;
+    color: var(--ink-soft);
+    font-size: 13.5px;
+  }
+  footer a{ color: var(--ink-soft); }
+</style>
+</head>
+<body>
+
+<div class="warp" aria-hidden="true"><span></span><span></span><span></span></div>
+
+<div class="wrap">
+
+  <header>
+    <p class="kicker">Video index — companion to the thesis</p>
+    <h1>Animated Textileforms Towards Tent Architecture</h1>
+    <p class="lede">
+      A collection of the process and demonstrator footage referenced throughout the thesis.
+      Each chapter below mirrors a section of the written document — follow a QR code from the
+      page you're reading, or browse from here.
+    </p>
+    <div class="slits" aria-hidden="true">
+      <div class="slit"></div><div class="slit"></div><div class="slit"></div><div class="slit"></div><div class="slit"></div>
+    </div>
+  </header>
+
+  <nav class="toc" aria-label="Chapters">
+    <a href="#slit-animation">Slit animation</a>
+    <a href="#counterforce">Counterforce mechanisms</a>
+    <a href="#scaling">Scaling tests</a>
+    <a href="#final-demonstrator">Final demonstrator</a>
+  </nav>
+
+  <main>
+
+    <section class="chapter" id="slit-animation">
+      <div class="chapter-head">
+        <span class="chapter-num">1</span>
+        <h2>Slit animation</h2>
+      </div>
+      <p class="chapter-note">
+        Early parametric tests of individual slits opening and closing, followed by the grid
+        behaviour that emerged once slits were tested collectively.
+      </p>
+
+      <div class="video-grid">
+
+        <div class="video-card">
+          <div class="video-frame is-empty">
+            <!-- Replace this div with:
+            <iframe src="https://player.vimeo.com/video/VIDEO_ID" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+            -->
+            Vimeo embed goes here
+          </div>
+          <h3 class="video-title">Single slit, parametric test I</h3>
+          <p class="video-caption">Closing one slit against gravity — the configuration that failed.</p>
+          <span class="video-meta"><a href="#slit-animation">#slit-animation</a> · anchor for QR code</span>
+        </div>
+
+        <div class="video-card">
+          <div class="video-frame is-empty">Vimeo embed goes here</div>
+          <h3 class="video-title">Slit grid, collective behaviour</h3>
+          <p class="video-caption">A field of slits opening together, fabric sections cooperating with continuous SMA.</p>
+          <span class="video-meta"><a href="#slit-animation">#slit-animation</a> · anchor for QR code</span>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="chapter" id="counterforce">
+      <div class="chapter-head">
+        <span class="chapter-num">2</span>
+        <h2>Counterforce mechanisms</h2>
+      </div>
+      <p class="chapter-note">
+        Three counterforce configurations tested against the same SMA actuation, showing how
+        recovery time and consistency shift independent of the active material itself.
+      </p>
+
+      <div class="video-grid">
+
+        <div class="video-card">
+          <div class="video-frame is-empty">Vimeo embed goes here</div>
+          <h3 class="video-title">Spring counterforce</h3>
+          <p class="video-caption">Baseline recovery behaviour.</p>
+          <span class="video-meta"><a href="#counterforce">#counterforce</a> · anchor for QR code</span>
+        </div>
+
+        <div class="video-card">
+          <div class="video-frame is-empty">Vimeo embed goes here</div>
+          <h3 class="video-title">Shrinking yarn counterforce</h3>
+          <p class="video-caption">Slower recovery, different energy profile.</p>
+          <span class="video-meta"><a href="#counterforce">#counterforce</a> · anchor for QR code</span>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="chapter" id="scaling">
+      <div class="chapter-head">
+        <span class="chapter-num">3</span>
+        <h2>Scaling tests</h2>
+      </div>
+      <p class="chapter-note">
+        Blowing up versus repeating, side by side — the same unit geometry enlarged, and the
+        same unit geometry multiplied.
+      </p>
+
+      <div class="video-grid">
+
+        <div class="video-card">
+          <div class="video-frame is-empty">Vimeo embed goes here</div>
+          <h3 class="video-title">Blown-up unit</h3>
+          <p class="video-caption">Formal logic preserved, tested actuation no longer holds.</p>
+          <span class="video-meta"><a href="#scaling">#scaling</a> · anchor for QR code</span>
+        </div>
+
+        <div class="video-card">
+          <div class="video-frame is-empty">Vimeo embed goes here</div>
+          <h3 class="video-title">Repeated unit</h3>
+          <p class="video-caption">Tested relationships preserved, modular rather than continuous form.</p>
+          <span class="video-meta"><a href="#scaling">#scaling</a> · anchor for QR code</span>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="chapter" id="final-demonstrator">
+      <div class="chapter-head">
+        <span class="chapter-num">4</span>
+        <h2>Final demonstrator</h2>
+      </div>
+      <p class="chapter-note">
+        The completed structure — layer separation, SMA actuation, and slit behaviour combined
+        at the largest scale tested in this thesis.
+      </p>
+
+      <div class="video-grid">
+
+        <div class="video-card">
+          <div class="video-frame is-empty">Vimeo embed goes here</div>
+          <h3 class="video-title">Full cycle, structural layer + membrane</h3>
+          <p class="video-caption">One complete open–close cycle of the final demonstrator.</p>
+          <span class="video-meta"><a href="#final-demonstrator">#final-demonstrator</a> · anchor for QR code</span>
+        </div>
+
+        <div class="video-card">
+          <div class="video-frame is-empty">Vimeo embed goes here</div>
+          <h3 class="video-title">Detail, membrane response</h3>
+          <p class="video-caption">Close-up on the responsive region within the structural layer.</p>
+          <span class="video-meta"><a href="#final-demonstrator">#final-demonstrator</a> · anchor for QR code</span>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>Companion video index for the graduation thesis <em>Animated Textileforms Towards Tent Architecture</em>, TU Delft. Videos hosted unlisted on Vimeo.</p>
+  </footer>
+
+</div>
+
+</body>
+</html>
