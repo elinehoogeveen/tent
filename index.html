@@ -6,19 +6,18 @@
 <title>Animated Textileforms — Video Index</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;1,400;1,500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg: #EDEAE2;
-    --paper: #F5F3ED;
-    --ink: #201F1D;
-    --ink-soft: #55524B;
-    --thread: #6B4226;
-    --accent: #3A5A55;
-    --line: #C9C2B4;
-    --line-soft: #DAD5C8;
+    --bg: #FFFFFF;
+    --paper: #FFFFFF;
+    --ink: #1D1D1B;
+    --ink-soft: #62615C;
+    --accent: #1B3FD1;
+    --line: #C7C7C1;
     --radius: 2px;
-    --max: 880px;
+    --content: 920px;
+    --line-gap: 460px;
   }
 
   *{ box-sizing: border-box; }
@@ -29,59 +28,82 @@
     margin:0;
     background: var(--bg);
     color: var(--ink);
-    font-family: 'IBM Plex Sans', sans-serif;
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
     font-size: 16px;
-    line-height: 1.6;
+    line-height: 1.65;
     -webkit-font-smoothing: antialiased;
   }
 
+  /* film-grain overlay, sits above everything: a small tiled grain texture. */
+  body::after{
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    pointer-events: none;
+    opacity: 0.8;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/png;base64,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");
+    background-size: 200px 200px;
+    background-repeat: repeat;
+  }
+
   a{ color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 3px; }
-  a:hover{ color: var(--thread); }
+  a:hover{ color: var(--ink); }
   a:focus-visible, button:focus-visible{
     outline: 2px solid var(--accent);
     outline-offset: 3px;
   }
 
   h1, h2, h3{
-    font-family: 'Newsreader', serif;
+    font-family: 'Inter', sans-serif;
     font-weight: 500;
     margin: 0;
     color: var(--ink);
   }
 
   .wrap{
-    max-width: var(--max);
+    max-width: var(--content);
     margin: 0 auto;
-    padding: 0 28px;
+    padding: 0 40px;
     position: relative;
   }
 
-  /* --- Warp threads: faint vertical grid running the height of the page --- */
+  /* --- Warp threads: faint vertical grid, set apart from the text column --- */
   .warp{
     position: fixed;
     inset: 0;
     z-index: 0;
     pointer-events: none;
-    max-width: var(--max);
-    margin: 0 auto;
-    padding: 0 28px;
   }
   .warp span{
     position: absolute;
     top: 0; bottom: 0;
     width: 1px;
-    background: var(--line-soft);
+    background: var(--line);
   }
-  .warp span:nth-child(1){ left: 28px; }
+  .warp span:nth-child(1){ left: calc(50% - var(--line-gap)); }
   .warp span:nth-child(2){ left: 50%; }
-  .warp span:nth-child(3){ right: 28px; }
+  .warp span:nth-child(3){ left: calc(50% + var(--line-gap)); }
+
+  @media (max-width: 980px){
+    .warp{ display: none; }
+  }
 
   main, header, footer{ position: relative; z-index: 1; }
+
+  /* text sits on an opaque background so the warp line is masked / interrupted behind it */
+  h1, h2, h3, p, .kicker, .video-meta, nav.toc a, .hero-slits{
+    background: var(--bg);
+  }
+  nav.toc a{ padding: 2px 6px; margin: -2px -6px; }
 
   /* --- Header / hero --- */
   header{
     padding: 72px 0 56px;
     border-bottom: 1px solid var(--line);
+    background: var(--bg);
   }
 
   .kicker{
@@ -89,12 +111,15 @@
     color: var(--ink-soft);
     margin: 0 0 18px;
     letter-spacing: 0.01em;
+    display: inline-block;
   }
 
   header h1{
-    font-size: clamp(30px, 5vw, 44px);
-    line-height: 1.15;
-    max-width: 14ch;
+    font-size: clamp(30px, 5vw, 42px);
+    font-weight: 400;
+    line-height: 1.2;
+    max-width: 16ch;
+    letter-spacing: -0.01em;
   }
 
   header p.lede{
@@ -102,56 +127,37 @@
     max-width: 52ch;
     color: var(--ink-soft);
     font-size: 16.5px;
+    display: inline-block;
   }
 
-  /* subtle hero motif: a row of "slits" that ease open, once, on load */
-  .slits{
-    display: flex;
-    gap: 10px;
-    margin-top: 40px;
+  /* --- Hero motif: five horizontal slits, a continuous tangent-curved wave
+       easing from a flat closed bar to a fuller open form, and back --- */
+  .hero-slits{
+    display: block;
+    margin-top: 44px;
+    width: 100%;
+    max-width: 420px;
+    height: auto;
   }
-  .slit{
-    width: 34px;
-    height: 46px;
-    border: 1px solid var(--ink);
-    border-radius: var(--radius);
-    position: relative;
-    overflow: hidden;
-    flex-shrink: 0;
-  }
-  .slit::before{
-    content: "";
-    position: absolute;
-    left: 50%;
-    top: 8%;
-    width: 1px;
-    height: 84%;
-    background: var(--ink);
-    transform: translateX(-50%) scaleX(1);
-    transform-origin: center;
-    animation: openSlit 2.6s ease-in-out infinite alternate;
-  }
-  .slit:nth-child(2)::before{ animation-delay: .3s; }
-  .slit:nth-child(3)::before{ animation-delay: .6s; }
-  .slit:nth-child(4)::before{ animation-delay: .9s; }
-  .slit:nth-child(5)::before{ animation-delay: 1.2s; }
-
-  @keyframes openSlit{
-    from{ width: 1px; }
-    to{ width: 14px; background: transparent; border-left: 1px solid var(--ink); border-right: 1px solid var(--ink); }
+  .slit-shape{
+    fill: none;
+    stroke: var(--ink);
+    stroke-width: 1.3;
+    stroke-linecap: round;
   }
 
   @media (prefers-reduced-motion: reduce){
-    .slit::before{ animation: none; width: 8px; background: transparent; border-left: 1px solid var(--ink); border-right: 1px solid var(--ink); }
+    .slit-shape animate{ display: none; }
   }
 
   /* --- Table of contents --- */
   nav.toc{
-    padding: 28px 0;
+    padding: 34px 0;
     border-bottom: 1px solid var(--line);
     display: flex;
     flex-wrap: wrap;
-    gap: 6px 22px;
+    gap: 8px 22px;
+    background: var(--bg);
   }
   nav.toc a{
     font-size: 14px;
@@ -159,11 +165,11 @@
     text-decoration: none;
     white-space: nowrap;
   }
-  nav.toc a:hover{ color: var(--thread); }
+  nav.toc a:hover{ color: var(--accent); }
 
   /* --- Chapters --- */
   .chapter{
-    padding: 64px 0;
+    padding: 88px 0;
     border-bottom: 1px solid var(--line);
     scroll-margin-top: 24px;
   }
@@ -176,30 +182,30 @@
     margin-bottom: 8px;
   }
   .chapter-num{
-    font-family: 'Newsreader', serif;
-    font-style: italic;
-    color: var(--thread);
-    font-size: 18px;
-    min-width: 28px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    color: var(--accent);
+    font-size: 16px;
+    min-width: 24px;
+    background: var(--bg);
   }
-  .chapter h2{ font-size: 26px; }
+  .chapter h2{ font-size: 25px; font-weight: 400; display: inline-block; }
   .chapter-note{
     color: var(--ink-soft);
     max-width: 58ch;
-    margin: 14px 0 36px;
+    margin: 16px 0 40px;
     font-size: 15px;
+    display: inline-block;
   }
 
   .video-grid{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 32px 28px;
+    gap: 40px 80px;
   }
   @media (max-width: 640px){
-    .video-grid{ grid-template-columns: 1fr; }
+    .video-grid{ grid-template-columns: 1fr; gap: 32px; }
   }
-
-  .video-card{ }
 
   .video-frame{
     position: relative;
@@ -210,14 +216,17 @@
     border-radius: var(--radius);
     overflow: hidden;
   }
-  .video-frame iframe{
+  .video-frame iframe,
+  .video-frame video{
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
     border: 0;
+    object-fit: cover;
+    background: #000;
   }
-  /* placeholder look, remove once an iframe src is filled in */
+  /* placeholder look, for any card without a source yet */
   .video-frame.is-empty{
     display: flex;
     align-items: center;
@@ -228,23 +237,38 @@
     padding: 20px;
   }
 
+  .subgroup{
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 13px;
+    color: var(--ink-soft);
+    letter-spacing: 0.01em;
+    margin: 36px 0 18px;
+    background: var(--bg);
+    display: inline-block;
+  }
+  .subgroup:first-of-type{ margin-top: 8px; }
+
   .video-title{
-    font-family: 'Newsreader', serif;
-    font-size: 18px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 17px;
     margin: 16px 0 4px;
+    display: inline-block;
   }
   .video-caption{
     font-size: 14px;
     color: var(--ink-soft);
     margin: 0;
     max-width: 46ch;
+    font-weight: 300;
+    display: inline-block;
   }
   .video-meta{
-    display: block;
+    display: inline-block;
     font-size: 12.5px;
     color: var(--ink-soft);
     margin-top: 8px;
-    font-family: 'IBM Plex Sans', sans-serif;
   }
   .video-meta a{ font-size: 12.5px; }
 
@@ -253,6 +277,7 @@
     color: var(--ink-soft);
     font-size: 13.5px;
   }
+  footer p{ max-width: 60ch; }
   footer a{ color: var(--ink-soft); }
 </style>
 </head>
@@ -270,138 +295,482 @@
       Each chapter below mirrors a section of the written document — follow a QR code from the
       page you're reading, or browse from here.
     </p>
-    <div class="slits" aria-hidden="true">
-      <div class="slit"></div><div class="slit"></div><div class="slit"></div><div class="slit"></div><div class="slit"></div>
-    </div>
+
+    <!-- Hero motif: five horizontal slits, each a smooth closed wave (four
+         tangent-continuous curves, no sharp corners) easing between a flat
+         closed bar and a fuller open form. -->
+    <svg class="hero-slits" viewBox="0 0 760 80" aria-hidden="true">
+      <path class="slit-shape" transform="translate(0,0)"
+        d="M0,33 C45,33 20,33 65,33 C110,33 85,33 130,33">
+        <animate attributeName="d" dur="2.8s" begin="0s" repeatCount="indefinite"
+          values="M0,33 C45,33 20,33 65,33 C110,33 85,33 130,33;
+                   M0,33 C45,33 20,10 65,10 C110,10 85,33 130,33;
+                   M0,33 C45,33 20,33 65,33 C110,33 85,33 130,33" />
+      </path>
+      <path class="slit-shape" transform="translate(0,0)"
+        d="M0,47 C45,47 20,47 65,47 C110,47 85,47 130,47">
+        <animate attributeName="d" dur="2.8s" begin="0s" repeatCount="indefinite"
+          values="M0,47 C45,47 20,47 65,47 C110,47 85,47 130,47;
+                   M0,47 C45,47 20,70 65,70 C110,70 85,47 130,47;
+                   M0,47 C45,47 20,47 65,47 C110,47 85,47 130,47" />
+      </path>
+      <path class="slit-shape" transform="translate(154,0)"
+        d="M0,33 C45,33 20,33 65,33 C110,33 85,33 130,33">
+        <animate attributeName="d" dur="2.8s" begin="0.22s" repeatCount="indefinite"
+          values="M0,33 C45,33 20,33 65,33 C110,33 85,33 130,33;
+                   M0,33 C45,33 20,10 65,10 C110,10 85,33 130,33;
+                   M0,33 C45,33 20,33 65,33 C110,33 85,33 130,33" />
+      </path>
+      <path class="slit-shape" transform="translate(154,0)"
+        d="M0,47 C45,47 20,47 65,47 C110,47 85,47 130,47">
+        <animate attributeName="d" dur="2.8s" begin="0.22s" repeatCount="indefinite"
+          values="M0,47 C45,47 20,47 65,47 C110,47 85,47 130,47;
+                   M0,47 C45,47 20,70 65,70 C110,70 85,47 130,47;
+                   M0,47 C45,47 20,47 65,47 C110,47 85,47 130,47" />
+      </path>
+      <path class="slit-shape" transform="translate(308,0)"
+        d="M0,33 C45,33 20,33 65,33 C110,33 85,33 130,33">
+        <animate attributeName="d" dur="2.8s" begin="0.44s" repeatCount="indefinite"
+          values="M0,33 C45,33 20,33 65,33 C110,33 85,33 130,33;
+                   M0,33 C45,33 20,10 65,10 C110,10 85,33 130,33;
+                   M0,33 C45,33 20,33 65,33 C110,33 85,33 130,33" />
+      </path>
+      <path class="slit-shape" transform="translate(308,0)"
+        d="M0,47 C45,47 20,47 65,47 C110,47 85,47 130,47">
+        <animate attributeName="d" dur="2.8s" begin="0.44s" repeatCount="indefinite"
+          values="M0,47 C45,47 20,47 65,47 C110,47 85,47 130,47;
+                   M0,47 C45,47 20,70 65,70 C110,70 85,47 130,47;
+                   M0,47 C45,47 20,47 65,47 C110,47 85,47 130,47" />
+      </path>
+      <path class="slit-shape" transform="translate(462,0)"
+        d="M0,33 C45,33 20,33 65,33 C110,33 85,33 130,33">
+        <animate attributeName="d" dur="2.8s" begin="0.66s" repeatCount="indefinite"
+          values="M0,33 C45,33 20,33 65,33 C110,33 85,33 130,33;
+                   M0,33 C45,33 20,10 65,10 C110,10 85,33 130,33;
+                   M0,33 C45,33 20,33 65,33 C110,33 85,33 130,33" />
+      </path>
+      <path class="slit-shape" transform="translate(462,0)"
+        d="M0,47 C45,47 20,47 65,47 C110,47 85,47 130,47">
+        <animate attributeName="d" dur="2.8s" begin="0.66s" repeatCount="indefinite"
+          values="M0,47 C45,47 20,47 65,47 C110,47 85,47 130,47;
+                   M0,47 C45,47 20,70 65,70 C110,70 85,47 130,47;
+                   M0,47 C45,47 20,47 65,47 C110,47 85,47 130,47" />
+      </path>
+      <path class="slit-shape" transform="translate(616,0)"
+        d="M0,33 C45,33 20,33 65,33 C110,33 85,33 130,33">
+        <animate attributeName="d" dur="2.8s" begin="0.88s" repeatCount="indefinite"
+          values="M0,33 C45,33 20,33 65,33 C110,33 85,33 130,33;
+                   M0,33 C45,33 20,10 65,10 C110,10 85,33 130,33;
+                   M0,33 C45,33 20,33 65,33 C110,33 85,33 130,33" />
+      </path>
+      <path class="slit-shape" transform="translate(616,0)"
+        d="M0,47 C45,47 20,47 65,47 C110,47 85,47 130,47">
+        <animate attributeName="d" dur="2.8s" begin="0.88s" repeatCount="indefinite"
+          values="M0,47 C45,47 20,47 65,47 C110,47 85,47 130,47;
+                   M0,47 C45,47 20,70 65,70 C110,70 85,47 130,47;
+                   M0,47 C45,47 20,47 65,47 C110,47 85,47 130,47" />
+      </path>
+    </svg>
   </header>
 
   <nav class="toc" aria-label="Chapters">
-    <a href="#slit-animation">Slit animation</a>
-    <a href="#counterforce">Counterforce mechanisms</a>
-    <a href="#scaling">Scaling tests</a>
-    <a href="#final-demonstrator">Final demonstrator</a>
+    <a href="#tinkering">Tinkering</a>
+    <a href="#parametric-testing-i">Parametric testing I</a>
+    <a href="#material-interactions">Material interactions</a>
+    <a href="#parametric-testing-ii">Parametric testing II</a>
+    <a href="#post-processing">Post-processing</a>
+    <a href="#case-study-demonstrator">Case study demonstrator</a>
   </nav>
 
   <main>
 
-    <section class="chapter" id="slit-animation">
+    <section class="chapter" id="tinkering">
       <div class="chapter-head">
         <span class="chapter-num">1</span>
-        <h2>Slit animation</h2>
+        <h2>Tinkering</h2>
       </div>
       <p class="chapter-note">
-        Early parametric tests of individual slits opening and closing, followed by the grid
-        behaviour that emerged once slits were tested collectively.
+        Early hands-on experimentation with SMA wire and woven samples, before the tests were formalised into parameters.
       </p>
-
+      <h4 class="subgroup">Structure</h4>
       <div class="video-grid">
-
         <div class="video-card">
-          <div class="video-frame is-empty">
-            <!-- Replace this div with:
-            <iframe src="https://player.vimeo.com/video/VIDEO_ID" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-            -->
-            Vimeo embed goes here
+          <div class="video-frame">
+            <video controls preload="metadata" src="tentvideos/Tinkering/Structure/paper.MOV"></video>
           </div>
-          <h3 class="video-title">Single slit, parametric test I</h3>
-          <p class="video-caption">Closing one slit against gravity — the configuration that failed.</p>
-          <span class="video-meta"><a href="#slit-animation">#slit-animation</a> · anchor for QR code</span>
+          <h3 class="video-title">Paper</h3>
+          <span class="video-meta"><a href="#tinkering">#tinkering</a> · anchor for QR code</span>
         </div>
-
         <div class="video-card">
-          <div class="video-frame is-empty">Vimeo embed goes here</div>
-          <h3 class="video-title">Slit grid, collective behaviour</h3>
-          <p class="video-caption">A field of slits opening together, fabric sections cooperating with continuous SMA.</p>
-          <span class="video-meta"><a href="#slit-animation">#slit-animation</a> · anchor for QR code</span>
+          <div class="video-frame">
+            <video controls preload="metadata" src="tentvideos/Tinkering/Structure/xform.MOV"></video>
+          </div>
+          <h3 class="video-title">X form</h3>
+          <span class="video-meta"><a href="#tinkering">#tinkering</a> · anchor for QR code</span>
         </div>
-
+        <div class="video-card">
+          <div class="video-frame">
+            <video controls preload="metadata" src="tentvideos/Tinkering/Structure/shrinkingyarnI.MOV"></video>
+          </div>
+          <h3 class="video-title">Shrinking yarn I</h3>
+          <span class="video-meta"><a href="#tinkering">#tinkering</a> · anchor for QR code</span>
+        </div>
+        <div class="video-card">
+          <div class="video-frame">
+            <video controls preload="metadata" src="tentvideos/Tinkering/Structure/shrinkingyarnII.MOV"></video>
+          </div>
+          <h3 class="video-title">Shrinking yarn II</h3>
+          <span class="video-meta"><a href="#tinkering">#tinkering</a> · anchor for QR code</span>
+        </div>
+        <div class="video-card">
+          <div class="video-frame">
+            <video controls preload="metadata" src="tentvideos/Tinkering/Structure/SMAfly.MOV"></video>
+          </div>
+          <h3 class="video-title">SMA fly</h3>
+          <span class="video-meta"><a href="#tinkering">#tinkering</a> · anchor for QR code</span>
+        </div>
+      </div>
+      <h4 class="subgroup">Form</h4>
+      <div class="video-grid">
+        <div class="video-card">
+          <div class="video-frame">
+            <video controls preload="metadata" src="tentvideos/Tinkering/Form/paper.MOV"></video>
+          </div>
+          <h3 class="video-title">Paper</h3>
+          <span class="video-meta"><a href="#tinkering">#tinkering</a> · anchor for QR code</span>
+        </div>
+        <div class="video-card">
+          <div class="video-frame">
+            <video controls preload="metadata" src="tentvideos/Tinkering/Form/extrude.MOV"></video>
+          </div>
+          <h3 class="video-title">Extrude</h3>
+          <span class="video-meta"><a href="#tinkering">#tinkering</a> · anchor for QR code</span>
+        </div>
+        <div class="video-card">
+          <div class="video-frame">
+            <video controls preload="metadata" src="tentvideos/Tinkering/Form/SMAslit.mov"></video>
+          </div>
+          <h3 class="video-title">SMA slit</h3>
+          <span class="video-meta"><a href="#tinkering">#tinkering</a> · anchor for QR code</span>
+        </div>
+      </div>
+      <h4 class="subgroup">Response I</h4>
+      <div class="video-grid">
+        <div class="video-card">
+          <div class="video-frame">
+            <video controls preload="metadata" src="tentvideos/Tinkering/ResponseI/paper.MOV"></video>
+          </div>
+          <h3 class="video-title">Paper</h3>
+          <span class="video-meta"><a href="#tinkering">#tinkering</a> · anchor for QR code</span>
+        </div>
+        <div class="video-card">
+          <div class="video-frame">
+            <video controls preload="metadata" src="tentvideos/Tinkering/ResponseI/methodI.mov"></video>
+          </div>
+          <h3 class="video-title">Method I</h3>
+          <span class="video-meta"><a href="#tinkering">#tinkering</a> · anchor for QR code</span>
+        </div>
+        <div class="video-card">
+          <div class="video-frame">
+            <video controls preload="metadata" src="tentvideos/Tinkering/ResponseI/method2.MOV"></video>
+          </div>
+          <h3 class="video-title">Method 2</h3>
+          <span class="video-meta"><a href="#tinkering">#tinkering</a> · anchor for QR code</span>
+        </div>
+        <div class="video-card">
+          <div class="video-frame">
+            <video controls preload="metadata" src="tentvideos/Tinkering/ResponseI/interlacingyarn.MOV"></video>
+          </div>
+          <h3 class="video-title">Interlacing yarn</h3>
+          <span class="video-meta"><a href="#tinkering">#tinkering</a> · anchor for QR code</span>
+        </div>
+        <div class="video-card">
+          <div class="video-frame">
+            <video controls preload="metadata" src="tentvideos/Tinkering/ResponseI/smapaper.MOV"></video>
+          </div>
+          <h3 class="video-title">SMA paper</h3>
+          <span class="video-meta"><a href="#tinkering">#tinkering</a> · anchor for QR code</span>
+        </div>
+        <div class="video-card">
+          <div class="video-frame">
+            <video controls preload="metadata" src="tentvideos/Tinkering/ResponseI/smamethod2.MOV"></video>
+          </div>
+          <h3 class="video-title">SMA method 2</h3>
+          <span class="video-meta"><a href="#tinkering">#tinkering</a> · anchor for QR code</span>
+        </div>
+      </div>
+      <h4 class="subgroup">Response II</h4>
+      <div class="video-grid">
+        <div class="video-card">
+          <div class="video-frame">
+            <video controls preload="metadata" src="tentvideos/Tinkering/ResponseII/paper1.MOV"></video>
+          </div>
+          <h3 class="video-title">Paper 1</h3>
+          <span class="video-meta"><a href="#tinkering">#tinkering</a> · anchor for QR code</span>
+        </div>
+        <div class="video-card">
+          <div class="video-frame">
+            <video controls preload="metadata" src="tentvideos/Tinkering/ResponseII/paper2.MOV"></video>
+          </div>
+          <h3 class="video-title">Paper 2</h3>
+          <span class="video-meta"><a href="#tinkering">#tinkering</a> · anchor for QR code</span>
+        </div>
+        <div class="video-card">
+          <div class="video-frame">
+            <video controls preload="metadata" src="tentvideos/Tinkering/ResponseII/paper2sma.MOV"></video>
+          </div>
+          <h3 class="video-title">Paper 2 SMA</h3>
+          <span class="video-meta"><a href="#tinkering">#tinkering</a> · anchor for QR code</span>
+        </div>
       </div>
     </section>
 
-    <section class="chapter" id="counterforce">
+    <section class="chapter" id="parametric-testing-i">
       <div class="chapter-head">
         <span class="chapter-num">2</span>
-        <h2>Counterforce mechanisms</h2>
+        <h2>Parametric testing I</h2>
       </div>
       <p class="chapter-note">
-        Three counterforce configurations tested against the same SMA actuation, showing how
-        recovery time and consistency shift independent of the active material itself.
+        The first systematic test round, isolating single-slit behaviour before working with a full grid.
       </p>
-
       <div class="video-grid">
-
         <div class="video-card">
-          <div class="video-frame is-empty">Vimeo embed goes here</div>
-          <h3 class="video-title">Spring counterforce</h3>
-          <p class="video-caption">Baseline recovery behaviour.</p>
-          <span class="video-meta"><a href="#counterforce">#counterforce</a> · anchor for QR code</span>
+          <div class="video-frame">
+            <video controls preload="metadata" src="tentvideos/ParametricI/IMG_5807.mov"></video>
+          </div>
+          <h3 class="video-title">1</h3>
+          <span class="video-meta"><a href="#parametric-testing-i">#parametric-testing-i</a> · anchor for QR code</span>
         </div>
-
         <div class="video-card">
-          <div class="video-frame is-empty">Vimeo embed goes here</div>
-          <h3 class="video-title">Shrinking yarn counterforce</h3>
-          <p class="video-caption">Slower recovery, different energy profile.</p>
-          <span class="video-meta"><a href="#counterforce">#counterforce</a> · anchor for QR code</span>
+          <div class="video-frame">
+            <video controls preload="metadata" src="tentvideos/ParametricI/IMG_5864.mov"></video>
+          </div>
+          <h3 class="video-title">2</h3>
+          <span class="video-meta"><a href="#parametric-testing-i">#parametric-testing-i</a> · anchor for QR code</span>
         </div>
-
+        <div class="video-card">
+          <div class="video-frame">
+            <video controls preload="metadata" src="tentvideos/ParametricI/IMG_5861.mov"></video>
+          </div>
+          <h3 class="video-title">3</h3>
+          <span class="video-meta"><a href="#parametric-testing-i">#parametric-testing-i</a> · anchor for QR code</span>
+        </div>
       </div>
     </section>
 
-    <section class="chapter" id="scaling">
+    <section class="chapter" id="material-interactions">
       <div class="chapter-head">
         <span class="chapter-num">3</span>
-        <h2>Scaling tests</h2>
+        <h2>Material interactions</h2>
       </div>
       <p class="chapter-note">
-        Blowing up versus repeating, side by side — the same unit geometry enlarged, and the
-        same unit geometry multiplied.
+        How SMA, counterforce, and weave structure act on each other — spring, shrinking yarn, and superelastic wire compared under the same actuation.
       </p>
-
+      <h4 class="subgroup">Form</h4>
       <div class="video-grid">
-
         <div class="video-card">
-          <div class="video-frame is-empty">Vimeo embed goes here</div>
-          <h3 class="video-title">Blown-up unit</h3>
-          <p class="video-caption">Formal logic preserved, tested actuation no longer holds.</p>
-          <span class="video-meta"><a href="#scaling">#scaling</a> · anchor for QR code</span>
+          <div class="video-frame">
+            <video controls preload="metadata" src="tentvideos/Interactions/Form/extruderound.mp4"></video>
+          </div>
+          <h3 class="video-title">Extrude round</h3>
+          <span class="video-meta"><a href="#material-interactions">#material-interactions</a> · anchor for QR code</span>
         </div>
-
         <div class="video-card">
-          <div class="video-frame is-empty">Vimeo embed goes here</div>
-          <h3 class="video-title">Repeated unit</h3>
-          <p class="video-caption">Tested relationships preserved, modular rather than continuous form.</p>
-          <span class="video-meta"><a href="#scaling">#scaling</a> · anchor for QR code</span>
+          <div class="video-frame">
+            <video controls preload="metadata" src="tentvideos/Interactions/Form/extrudesquare.mov"></video>
+          </div>
+          <h3 class="video-title">Extrude square</h3>
+          <span class="video-meta"><a href="#material-interactions">#material-interactions</a> · anchor for QR code</span>
         </div>
-
+        <div class="video-card">
+          <div class="video-frame">
+            <video controls preload="metadata" src="tentvideos/Interactions/Form/roundsquare.mov"></video>
+          </div>
+          <h3 class="video-title">Round square</h3>
+          <span class="video-meta"><a href="#material-interactions">#material-interactions</a> · anchor for QR code</span>
+        </div>
+        <div class="video-card">
+          <div class="video-frame">
+            <video controls preload="metadata" src="tentvideos/Interactions/Form/formingh.mp4"></video>
+          </div>
+          <h3 class="video-title">Form in GH</h3>
+          <span class="video-meta"><a href="#material-interactions">#material-interactions</a> · anchor for QR code</span>
+        </div>
+        <div class="video-card">
+          <div class="video-frame">
+            <video controls preload="metadata" src="tentvideos/Interactions/Form/form%20prototype.MOV"></video>
+          </div>
+          <h3 class="video-title">Form prototype</h3>
+          <span class="video-meta"><a href="#material-interactions">#material-interactions</a> · anchor for QR code</span>
+        </div>
+      </div>
+      <h4 class="subgroup">Response</h4>
+      <div class="video-grid">
+        <div class="video-card">
+          <div class="video-frame">
+            <video controls preload="metadata" src="tentvideos/Interactions/Response/slitssmall.MOV"></video>
+          </div>
+          <h3 class="video-title">Slits, small</h3>
+          <span class="video-meta"><a href="#material-interactions">#material-interactions</a> · anchor for QR code</span>
+        </div>
+        <div class="video-card">
+          <div class="video-frame">
+            <video controls preload="metadata" src="tentvideos/Interactions/Response/elastic.mov"></video>
+          </div>
+          <h3 class="video-title">Elastic</h3>
+          <span class="video-meta"><a href="#material-interactions">#material-interactions</a> · anchor for QR code</span>
+        </div>
+        <div class="video-card">
+          <div class="video-frame">
+            <video controls preload="metadata" src="tentvideos/Interactions/Response/folds.mov"></video>
+          </div>
+          <h3 class="video-title">Folds</h3>
+          <span class="video-meta"><a href="#material-interactions">#material-interactions</a> · anchor for QR code</span>
+        </div>
+        <div class="video-card">
+          <div class="video-frame">
+            <video controls preload="metadata" src="tentvideos/Interactions/Response/slitsbigger.MOV"></video>
+          </div>
+          <h3 class="video-title">Slits, bigger</h3>
+          <span class="video-meta"><a href="#material-interactions">#material-interactions</a> · anchor for QR code</span>
+        </div>
+        <div class="video-card">
+          <div class="video-frame">
+            <video controls preload="metadata" src="tentvideos/Interactions/Response/slitsbiggerII.MOV"></video>
+          </div>
+          <h3 class="video-title">Slits, bigger II</h3>
+          <span class="video-meta"><a href="#material-interactions">#material-interactions</a> · anchor for QR code</span>
+        </div>
+        <div class="video-card">
+          <div class="video-frame">
+            <video controls preload="metadata" src="tentvideos/Interactions/Response/foldsbigger.MOV"></video>
+          </div>
+          <h3 class="video-title">Folds, bigger</h3>
+          <span class="video-meta"><a href="#material-interactions">#material-interactions</a> · anchor for QR code</span>
+        </div>
+      </div>
+      <h4 class="subgroup">Structure</h4>
+      <div class="video-grid">
+        <div class="video-card">
+          <div class="video-frame">
+            <video controls preload="metadata" src="tentvideos/Interactions/Structure/settingupatent.mp4"></video>
+          </div>
+          <h3 class="video-title">Setting up a tent</h3>
+          <span class="video-meta"><a href="#material-interactions">#material-interactions</a> · anchor for QR code</span>
+        </div>
       </div>
     </section>
 
-    <section class="chapter" id="final-demonstrator">
+    <section class="chapter" id="parametric-testing-ii">
       <div class="chapter-head">
         <span class="chapter-num">4</span>
-        <h2>Final demonstrator</h2>
+        <h2>Parametric testing II</h2>
       </div>
       <p class="chapter-note">
-        The completed structure — layer separation, SMA actuation, and slit behaviour combined
-        at the largest scale tested in this thesis.
+        The second test round, moving from a single slit to a cooperating grid, and surfacing how SMA stiffness behaves as dimensions grow.
       </p>
-
       <div class="video-grid">
-
         <div class="video-card">
-          <div class="video-frame is-empty">Vimeo embed goes here</div>
-          <h3 class="video-title">Full cycle, structural layer + membrane</h3>
-          <p class="video-caption">One complete open–close cycle of the final demonstrator.</p>
-          <span class="video-meta"><a href="#final-demonstrator">#final-demonstrator</a> · anchor for QR code</span>
+          <div class="video-frame">
+            <video controls preload="metadata" src="tentvideos/Interactions/Response/cloth1.mov"></video>
+          </div>
+          <h3 class="video-title">Cloth 1</h3>
+          <span class="video-meta"><a href="#parametric-testing-ii">#parametric-testing-ii</a> · anchor for QR code</span>
         </div>
-
         <div class="video-card">
-          <div class="video-frame is-empty">Vimeo embed goes here</div>
-          <h3 class="video-title">Detail, membrane response</h3>
-          <p class="video-caption">Close-up on the responsive region within the structural layer.</p>
-          <span class="video-meta"><a href="#final-demonstrator">#final-demonstrator</a> · anchor for QR code</span>
+          <div class="video-frame">
+            <video controls preload="metadata" src="tentvideos/Interactions/Response/cloth2.mov"></video>
+          </div>
+          <h3 class="video-title">Cloth 2</h3>
+          <span class="video-meta"><a href="#parametric-testing-ii">#parametric-testing-ii</a> · anchor for QR code</span>
         </div>
+        <div class="video-card">
+          <div class="video-frame">
+            <video controls preload="metadata" src="tentvideos/Interactions/Response/cloth3.mov"></video>
+          </div>
+          <h3 class="video-title">Cloth 3</h3>
+          <span class="video-meta"><a href="#parametric-testing-ii">#parametric-testing-ii</a> · anchor for QR code</span>
+        </div>
+        <div class="video-card">
+          <div class="video-frame">
+            <video controls preload="metadata" src="tentvideos/Interactions/Response/cloth4.mov"></video>
+          </div>
+          <h3 class="video-title">Cloth 4</h3>
+          <span class="video-meta"><a href="#parametric-testing-ii">#parametric-testing-ii</a> · anchor for QR code</span>
+        </div>
+        <div class="video-card">
+          <div class="video-frame">
+            <video controls preload="metadata" src="tentvideos/ParametricII/scalebyrepeat.mov"></video>
+          </div>
+          <h3 class="video-title">Scale by implode</h3>
+          <span class="video-meta"><a href="#parametric-testing-ii">#parametric-testing-ii</a> · anchor for QR code</span>
+        </div>
+        <div class="video-card">
+          <div class="video-frame">
+            <video controls preload="metadata" src="tentvideos/ParametricII/testmeander3.mov"></video>
+          </div>
+          <h3 class="video-title">Test meander</h3>
+          <span class="video-meta"><a href="#parametric-testing-ii">#parametric-testing-ii</a> · anchor for QR code</span>
+        </div>
+        <div class="video-card">
+          <div class="video-frame">
+            <video controls preload="metadata" src="tentvideos/ParametricII/testingsmasprings.mp4"></video>
+          </div>
+          <h3 class="video-title">Testing SMA springs</h3>
+          <span class="video-meta"><a href="#parametric-testing-ii">#parametric-testing-ii</a> · anchor for QR code</span>
+        </div>
+        <div class="video-card">
+          <div class="video-frame">
+            <video controls preload="metadata" src="tentvideos/ParametricII/finalconfig.mp4"></video>
+          </div>
+          <h3 class="video-title">Final configuration</h3>
+          <span class="video-meta"><a href="#parametric-testing-ii">#parametric-testing-ii</a> · anchor for QR code</span>
+        </div>
+      </div>
+    </section>
 
+    <section class="chapter" id="post-processing">
+      <div class="chapter-head">
+        <span class="chapter-num">5</span>
+        <h2>Post-processing</h2>
+      </div>
+      <p class="chapter-note">
+        Preparing woven samples after they leave the loom, before they're ready for testing.
+      </p>
+      <div class="video-grid">
+        <div class="video-card">
+          <div class="video-frame">
+            <video controls preload="metadata" src="tentvideos/Postprocessing/IMG_7057.mov"></video>
+          </div>
+          <h3 class="video-title">Lasercutting weave</h3>
+          <span class="video-meta"><a href="#post-processing">#post-processing</a> · anchor for QR code</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="chapter" id="case-study-demonstrator">
+      <div class="chapter-head">
+        <span class="chapter-num">6</span>
+        <h2>Case study demonstrator</h2>
+      </div>
+      <p class="chapter-note">
+        The final structure — layer separation, SMA actuation, and slit behaviour combined at the largest scale tested in this thesis.
+      </p>
+      <div class="video-grid">
+        <div class="video-card">
+          <div class="video-frame">
+            <video controls preload="metadata" src="tentvideos/Demonstrator/textile.MOV"></video>
+          </div>
+          <h3 class="video-title">Textile</h3>
+          <span class="video-meta"><a href="#case-study-demonstrator">#case-study-demonstrator</a> · anchor for QR code</span>
+        </div>
+        <div class="video-card">
+          <div class="video-frame">
+            <video controls preload="metadata" src="tentvideos/Demonstrator/unfolding.MOV"></video>
+          </div>
+          <h3 class="video-title">Unfolding</h3>
+          <span class="video-meta"><a href="#case-study-demonstrator">#case-study-demonstrator</a> · anchor for QR code</span>
+        </div>
       </div>
     </section>
 
